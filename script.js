@@ -8,6 +8,7 @@ window.addEventListener("load", () => {
   let locationTimezone = document.querySelector(".location-timezone");
   let temperatureSection = document.querySelector(".degree-section");
   const temperatureSpan = document.querySelector(".degree-section span");
+  let pressurehPa = document.querySelector(".pressure");
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
@@ -22,11 +23,12 @@ window.addEventListener("load", () => {
         })
         .then(data => {
           console.log(data);
-          const { temperature, summary, icon } = data.currently;
+          const { temperature, pressure, summary, icon } = data.currently;
           //Set DOM elements from API
           temperatureDegree.textContent = temperature;
           temperatureDescription.textContent = summary;
           locationTimezone.textContent = data.timezone;
+          pressurehPa.textContent = pressure + " hPa";
           //Change value F to C
           let celcius = (temperature - 32) * (5 / 9);
           //Set icon
